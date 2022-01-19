@@ -41,5 +41,6 @@ export class TransitionScrollContainerComponent implements OnInit{
   navigateToday() {
     const today = new Date(Date.now())
     this.date = new Date(today.getFullYear(), today.getMonth(), 1)
+    // this.route.navigate(['transition-scroll'], { queryParams: { year: today.getFullYear(), month: today.getMonth() } })
   }
 }
