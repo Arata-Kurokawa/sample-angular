@@ -1,0 +1,26 @@
+
+<div class = "header">
+  <button
+    (click)="prevMonth()"
+  >< 前月</button>
+  <div>{{ date.getFullYear() }}/{{ date.getMonth() + 1 }}</div>
+  <button
+    (click)="nextMonth()"
+  >次月 ></button>
+</div>
+
+<div class = "content">
+  <app-transition-scroll
+    [date]="date"
+  >
+
+  </app-transition-scroll>
+</div>
+
+
+<button
+  class = "today-button"
+  (click)="navigateToday()"
+>
+  今日へ
+</button>

@@ -1,0 +1,16 @@
+
+:host {
+  .date-list {
+    width: 600px;
+    height: 100px;
+    display: flex;
+    overflow: scroll;
+
+    .date {
+      width: 80px;
+      height: 100%;
+      border-right: black solid 1px;
+      flex-shrink: 0;
+    }
+  }
+}
