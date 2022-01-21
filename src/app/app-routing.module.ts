@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: "transition-scroll",
-    loadChildren: () => import('./pages/transition-scroll/transition-scroll.module').then(m => m.TransitionScrollModule)
+    loadChildren: () => import('./pages/scroll-after-transition-in-page/scroll-after-transition-in-page.module').then(m => m.ScrollAfterTransitionInPageModule)
   }
 ];
 

@@ -1,15 +1,15 @@
 import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core'
-import { TransitionScrollComponent } from './components/transition-scroll.component'
+import { ScrollAfterTransitionInPageComponent } from './components/scroll-after-transition-in-page.component'
 import { Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
 import * as dayjs from 'dayjs'
 
 @Component({
-  templateUrl: './transition-scroll.container.html',
-  styleUrls: [ './transition-scroll.container.scss' ]
+  templateUrl: './scroll-after-transition-in-page.container.html',
+  styleUrls: [ './scroll-after-transition-in-page.container.scss' ]
 })
-export class TransitionScrollContainerComponent  implements OnInit, AfterViewChecked {
-  @ViewChild('transitionScroll') transitionScroll!: TransitionScrollComponent
+export class ScrollAfterTransitionInPageContainerComponent  implements OnInit, AfterViewChecked {
+  @ViewChild('scrollAfterTransitionInPage') scrollAfterTransitionInPage!: ScrollAfterTransitionInPageComponent
 
   date = dayjs(Date.now())
   today = dayjs(Date.now())
@@ -43,7 +43,7 @@ export class TransitionScrollContainerComponent  implements OnInit, AfterViewChe
         takeUntil(this.unsubscribe$)
       )
       .subscribe(() => {
-        this.transitionScroll.scrollToday()
+        this.scrollAfterTransitionInPage.scrollToday()
       })
 
     this.date = this.today

@@ -2,11 +2,11 @@ import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } fro
 import * as dayjs from 'dayjs'
 
 @Component({
-  selector: 'app-transition-scroll',
-  templateUrl: './transition-scroll.component.html',
-  styleUrls: [ './transition-scroll.component.scss' ]
+  selector: 'app-scroll-after-transition-in-page',
+  templateUrl: './scroll-after-transition-in-page.component.html',
+  styleUrls: [ './scroll-after-transition-in-page.component.scss' ]
 })
-export class TransitionScrollComponent implements OnInit, AfterViewChecked {
+export class ScrollAfterTransitionInPageComponent implements OnInit, AfterViewChecked {
   @ViewChild('dateList') private dateList!: ElementRef
 
   @Input() today: dayjs.Dayjs = dayjs(Date.now())
