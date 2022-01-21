@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core'
 import { ScrollAfterTransitionInPageComponent } from './components/scroll-after-transition-in-page.component'
 import { BehaviorSubject, Subject, timer } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
@@ -8,7 +8,7 @@ import * as dayjs from 'dayjs'
   templateUrl: './scroll-after-transition-in-page.container.html',
   styleUrls: [ './scroll-after-transition-in-page.container.scss' ]
 })
-export class ScrollAfterTransitionInPageContainerComponent  implements OnInit, AfterViewInit, AfterViewChecked {
+export class ScrollAfterTransitionInPageContainerComponent  implements OnInit, AfterViewChecked {
   @ViewChild('scrollAfterTransitionInPage') scrollAfterTransitionInPage!: ScrollAfterTransitionInPageComponent
 
   date$ = new BehaviorSubject<dayjs.Dayjs | null>(null)
@@ -28,10 +28,6 @@ export class ScrollAfterTransitionInPageContainerComponent  implements OnInit, A
     ).subscribe(() => {
       this.date$.next(this.date)
     })
-  }
-
-  ngAfterViewInit() {
-    this.scrollAfterTransitionInPage.scrollToday()
   }
 
   ngAfterViewChecked() {
