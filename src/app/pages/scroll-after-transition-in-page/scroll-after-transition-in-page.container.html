@@ -1,5 +1,8 @@
 
-<div class = "header">
+<div
+  class = "header"
+  *ngIf = "date$ | async as date"
+>
   <button
     (click)="prevMonth()"
   >< 前月</button>
@@ -11,9 +14,11 @@
 
 <div class = "content">
   <app-scroll-after-transition-in-page
+    *ngIf = "date$ | async as date"
     #scrollAfterTransitionInPage
     [date]="date"
     [today]="today"
+    [scrolledToday]=true
   >
 
   </app-scroll-after-transition-in-page>
@@ -21,6 +26,7 @@
 
 
 <button
+  *ngIf = "date$ | async as date"
   class = "today-button"
   (click)="navigateToday()"
 >

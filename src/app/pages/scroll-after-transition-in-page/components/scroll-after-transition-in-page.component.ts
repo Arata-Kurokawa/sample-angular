@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
 import * as dayjs from 'dayjs'
 
 @Component({
@@ -6,9 +6,10 @@ import * as dayjs from 'dayjs'
   templateUrl: './scroll-after-transition-in-page.component.html',
   styleUrls: [ './scroll-after-transition-in-page.component.scss' ]
 })
-export class ScrollAfterTransitionInPageComponent implements OnInit, AfterViewChecked {
+export class ScrollAfterTransitionInPageComponent implements OnInit, AfterViewInit {
   @ViewChild('dateList') private dateList!: ElementRef
 
+  @Input() scrolledToday: boolean = false
   @Input() today: dayjs.Dayjs = dayjs(Date.now())
   @Input()
   get date(): dayjs.Dayjs { return this._date }
@@ -41,7 +42,10 @@ export class ScrollAfterTransitionInPageComponent implements OnInit, AfterViewCh
   ngOnInit() {
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewInit() {
+    if (this.scrolledToday) {
+      this.scrollToday()
+    }
   }
 
   scrollToday(): void {
