@@ -20,13 +20,12 @@
     [today]="today"
     [scrolledToday]=true
   >
-
   </app-scroll-after-transition-in-page>
 </div>
 
 
 <button
-  *ngIf = "date$ | async as date"
+  *ngIf = "date$ | async"
   class = "today-button"
   (click)="navigateToday()"
 >

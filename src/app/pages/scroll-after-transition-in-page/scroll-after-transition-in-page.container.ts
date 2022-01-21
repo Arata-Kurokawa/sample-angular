@@ -12,8 +12,8 @@ export class ScrollAfterTransitionInPageContainerComponent  implements OnInit, A
   @ViewChild('scrollAfterTransitionInPage') scrollAfterTransitionInPage!: ScrollAfterTransitionInPageComponent
 
   date$ = new BehaviorSubject<dayjs.Dayjs | null>(null)
-  today = dayjs(Date.now())
 
+  today = dayjs(Date.now())
   private date = dayjs(Date.now())
   private scrollable$ = new Subject<void>()
   private unsubscribe$ = new Subject<void>()
@@ -59,5 +59,6 @@ export class ScrollAfterTransitionInPageContainerComponent  implements OnInit, A
       })
 
     this.date = this.today
+    this.date$.next(this.date)
   }
 }
