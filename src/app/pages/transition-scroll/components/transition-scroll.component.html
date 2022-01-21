@@ -1,11 +1,13 @@
 
-
-
-<div class="date-list">
+<div
+  #dateList
+  class="date-list"
+>
   <div
     class="date"
-    *ngFor="let date of dateList"
+    *ngFor="let dateInfo of dateInfoList"
+    id="{{ dateInfo.isToday ? 'today' : null }}"
   >
-    {{ date.getMonth() + 1 }}/{{ date.getDate() }}
+    {{ dateInfo.date.format('MM/DD') }}
   </div>
 </div>

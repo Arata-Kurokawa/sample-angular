@@ -1,46 +1,51 @@
-import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core'
+import { TransitionScrollComponent } from './components/transition-scroll.component'
+import { Subject } from 'rxjs'
+import { take, takeUntil } from 'rxjs/operators'
+import * as dayjs from 'dayjs'
 
 @Component({
   templateUrl: './transition-scroll.container.html',
   styleUrls: [ './transition-scroll.container.scss' ]
 })
-export class TransitionScrollContainerComponent implements OnInit{
-  date = new Date(Date.now())
+export class TransitionScrollContainerComponent  implements OnInit, AfterViewChecked {
+  @ViewChild('transitionScroll') transitionScroll!: TransitionScrollComponent
+
+  date = dayjs(Date.now())
+  today = dayjs(Date.now())
+
+  private scrollable$ = new Subject<void>()
+  private unsubscribe$ = new Subject<void>()
 
   constructor(
-    private route: Router,
-    private activatedRoute: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    const year = this.activatedRoute.snapshot.queryParams.year
-    const month = this.activatedRoute.snapshot.queryParams.month
+  }
 
-
-    if (year && month) {
-      this.date = new Date(year, month, 1)
-    } else {
-      const today = new Date(Date.now())
-      this.date = new Date(today.getFullYear(), today.getMonth(), 1)
-    }
+  ngAfterViewChecked() {
+    this.scrollable$.next(void 0)
   }
 
   prevMonth() {
-    const [newYear, newMonth] = this.date.getMonth() <= 0 ? [this.date.getFullYear() - 1, 11] : [this.date.getFullYear(), this.date.getMonth() - 1]
-    this.date = new Date(newYear, newMonth, 1)
+    this.date = this.date.add(-1, 'month')
   }
 
   nextMonth() {
-    const [newYear, newMonth] = this.date.getMonth() >= 11 ? [this.date.getFullYear() + 1, 0] : [this.date.getFullYear(), this.date.getMonth() + 1]
-    this.date = new Date(newYear, newMonth, 1)
+    this.date = this.date.add(1, 'month')
   }
 
   navigateToday() {
-    const today = new Date(Date.now())
-    this.date = new Date(today.getFullYear(), today.getMonth(), 1)
-    // this.route.navigate(['transition-scroll'], { queryParams: { year: today.getFullYear(), month: today.getMonth() } })
+    this.scrollable$
+      .pipe(
+        take(1),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(() => {
+        this.transitionScroll.scrollToday()
+      })
+
+    this.date = this.today
   }
 }

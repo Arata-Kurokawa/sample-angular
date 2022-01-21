@@ -3,7 +3,7 @@
   <button
     (click)="prevMonth()"
   >< 前月</button>
-  <div>{{ date.getFullYear() }}/{{ date.getMonth() + 1 }}</div>
+  <div>{{ date.format('YYYY/MM') }}</div>
   <button
     (click)="nextMonth()"
   >次月 ></button>
@@ -11,7 +11,9 @@
 
 <div class = "content">
   <app-transition-scroll
+    #transitionScroll
     [date]="date"
+    [today]="today"
   >
 
   </app-transition-scroll>
